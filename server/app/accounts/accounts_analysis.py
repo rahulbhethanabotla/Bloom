@@ -10,13 +10,39 @@ user = {
 savings = {
     "id" : "kajsdf9823urkushdf",
     "balance": 100,
-    "transactions": [{"date" : "2016-12-18T", "amount" : 10}]
+    "transactions": [{"date" : "2020-10-16", "amount" : 10},
+                    {"date" : "2020-10-16", "amount" : 10},
+                    {"date" : "2020-10-15", "amount" : 10},
+                    {"date" : "2020-10-13", "amount" : 10},
+                    {"date" : "2020-10-7", "amount" : 10},
+                    {"date" : "2020-10-6", "amount" : 10},
+                    {"date" : "2020-10-5", "amount" : 10},
+                    {"date" : "2020-10-3", "amount" : 10},
+                    {"date" : "2020-10-1", "amount" : 10},
+                    {"date" : "2020-10-0", "amount" : 10},
+                    {"date" : "2020-9-19", "amount" : 10},
+                    {"date" : "2020-9-18", "amount" : 10},
+                    {"date" : "2020-9-17", "amount" : 10},
+                    {"date" : "2020-9-16", "amount" : 10}]
 }
 
 checkings = {
     "id" : "kajsdf9823urkushdf",
-    "balance": 150,
-    "transactions": [{"date" : "2016-12-18T", "amount" : 100}]
+    "balance": 300,
+    "transactions": [{"date" : "2020-10-16", "amount" : 10},
+                    {"date" : "2020-10-16", "amount" : 1},
+                    {"date" : "2020-10-15", "amount" : 10},
+                    {"date" : "2020-10-13", "amount" : 1},
+                    {"date" : "2020-10-7", "amount" : 10},
+                    {"date" : "2020-10-6", "amount" : 1},
+                    {"date" : "2020-10-5", "amount" : 10},
+                    {"date" : "2020-10-3", "amount" : 10},
+                    {"date" : "2020-10-1", "amount" : 50},
+                    {"date" : "2020-10-0", "amount" : 8},
+                    {"date" : "2020-9-19", "amount" : 31},
+                    {"date" : "2020-9-18", "amount" : 10},
+                    {"date" : "2020-9-17", "amount" : 35},
+                    {"date" : "2020-9-16", "amount" : 35}]
 }
 
 accounts_metrics = {
@@ -33,7 +59,21 @@ def get_checkings_stats():
     return {
             "id" : "kajsdf9823urkushdf",
             "balance": 150,
-            "transactions": [{"date" : "2016-12-18T", "amount" : 100}],
+            "transactions": [
+                {"date" : "2020-10-16", "amount" : 1},
+                {"date" : "2020-10-16", "amount" : 10},
+                {"date" : "2020-10-15", "amount" : 10},
+                {"date" : "2020-10-13", "amount" : 10},
+                {"date" : "2020-10-7", "amount" : 15},
+                {"date" : "2020-10-6", "amount" : 10},
+                {"date" : "2020-10-5", "amount" : 100},
+                {"date" : "2020-10-3", "amount" : 10},
+                {"date" : "2020-10-1", "amount" : 10},
+                {"date" : "2020-10-0", "amount" : 1},
+                {"date" : "2020-9-19", "amount" : 10},
+                {"date" : "2020-9-18", "amount" : 40},
+                {"date" : "2020-9-17", "amount" : 20},
+                {"date" : "2020-9-16", "amount" : 30}],
             "expenditures": 100 
         }
 
@@ -41,7 +81,21 @@ def get_savings_stats():
     return {
             "id" : "kajsdf9823urkushdf",
             "balance": 100,
-            "transactions": [{"date" : "2016-12-18T", "amount" : 10}],
+            "transactions": [
+                {"date" : "2020-10-16", "amount" : 10},
+                {"date" : "2020-10-16", "amount" : 1},
+                {"date" : "2020-10-15", "amount" : 10},
+                {"date" : "2020-10-13", "amount" : 1},
+                {"date" : "2020-10-7", "amount" : 10},
+                {"date" : "2020-10-6", "amount" : 1},
+                {"date" : "2020-10-5", "amount" : 10},
+                {"date" : "2020-10-3", "amount" : 10},
+                {"date" : "2020-10-1", "amount" : 50},
+                {"date" : "2020-10-0", "amount" : 8},
+                {"date" : "2020-9-19", "amount" : 31},
+                {"date" : "2020-9-18", "amount" : 10},
+                {"date" : "2020-9-17", "amount" : 35},
+                {"date" : "2020-9-16", "amount" : 35}],
             "savings": 10
         }
 
