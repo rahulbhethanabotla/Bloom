@@ -1,4 +1,5 @@
 import requests
+import json
 
 #########################################################################################################################
 # user_id:  written as HACKATHONUSER*** from 100 to 299 (101 doesn't seem to work for some reason?)
@@ -17,10 +18,13 @@ def get_user_accounts(user_id):
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    return response.text.encode('utf8')
+    return response.json()
 #########################################################################################################################
 
 #########################################################################################################################
+
+def get_account_id_from_accounts(response):
+    return response['accounts'][0]['id']
 
 
 def get_user_account(account_id, user_id):
@@ -34,7 +38,7 @@ def get_user_account(account_id, user_id):
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    return response.text.encode('utf8')
+    return response.json()
 #########################################################################################################################
 
 #########################################################################################################################
@@ -52,12 +56,7 @@ def get_transactions_from_account(account_id, user_id):
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
-    return response.text.encode('utf8')
+    return response.json()
 
 
-print(get_user_accounts("HACKATHONUSER250"))
-print("\n\n\n\n\n\n")
-print(get_user_account("RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs", "HACKATHONUSER250"))
-print("\n\n\n\n\n\n")
-print(get_transactions_from_account(
-    "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs", "HACKATHONUSER250"))
+# print(get_transactions_from_account(get_account_id_from_accounts(get_user_accounts("HACKATHONUSER250")), "HACKATHONUSER250"))
