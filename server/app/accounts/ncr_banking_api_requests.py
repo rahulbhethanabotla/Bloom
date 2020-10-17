@@ -1,6 +1,5 @@
 import requests
 import json
-import time
 
 #########################################################################################################################
 # user_id:  written as HACKATHONUSER*** from 100 to 299 (101 doesn't seem to work for some reason?)
