@@ -5,6 +5,13 @@ from tinydb import TinyDB, Query
 
 db = TinyDB('./customers.json')
 
+
+### username is 'HACKATHONUSER###'
+### first_name is a str
+### last_name is a str
+### phone is a str
+### savings_goal is double
+### portfolio is list of ['ticker', double_val]
 def create_customer(username, first_name, last_name, phone, savings_goal, portfolio):
     url = "https://gateway-staging.ncrcloud.com/cdm/consumers"
 
@@ -33,6 +40,9 @@ def create_customer(username, first_name, last_name, phone, savings_goal, portfo
 #create_customer("HACKATHONUSER107", "Jimmy", "Dean", "4082013554", "180.45", ["AAPL", 3.45])
 
 
+
+### payload needs to be of form {"fieldname": newval}
+### customer_username is 'HACKATHONUSER###'
 def update_customer_data(payload, customer_username):
     url = "https://gateway-staging.ncrcloud.com/cdm/consumers/C7WGBO6NABQOLRHB/update"
     headers = {
@@ -47,6 +57,7 @@ def update_customer_data(payload, customer_username):
     response = requests.request("PUT", url, headers=headers, data = payload)
 
 
+update_customer_data({'savingsGoal': 180.34}, "HACKATHONUSER107")
 
 def get_all_customers():
     db.all()
