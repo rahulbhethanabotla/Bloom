@@ -115,5 +115,3 @@ def get_transactions_for_specific_user_account_type(user_id, acct_type):
         return get_transactions_from_account(account_id, user_id)
     else:
         return None
-    
-    return all_transacs
