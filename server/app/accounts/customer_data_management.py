@@ -57,7 +57,7 @@ def update_customer_data(payload, customer_username):
     response = requests.request("PUT", url, headers=headers, data = payload)
 
 
-update_customer_data({'savingsGoal': 180.34}, "HACKATHONUSER107")
+update_customer_data({'portfolio': [('AAPL', 30.2)]}, "HACKATHONUSER107")
 
 def get_all_customers():
     db.all()
