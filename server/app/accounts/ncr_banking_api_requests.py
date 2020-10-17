@@ -91,4 +91,29 @@ def get_all_transactions_for_all_users():
         json.dump(all_user_transactions, outfile)
 
 
-get_all_transactions_for_all_users()
+
+## Checking account is "CHECKING"
+## Savings account is "TCL_MASTER"
+def get_specific_account_for_user(user_id, acct_type):
+    accts = get_user_accounts(user_id)
+    if 'accounts' in accts:
+        for user_account in accts['accounts']:
+            if user_account['type']['value'] == acct_type:
+                return user_account
+    else:
+        return None
+
+
+def get_transactions_for_specific_user_account_type(user_id, acct_type):
+    accts = get_user_accounts(user_id)
+    if 'accounts' in accts:
+        account_id = None
+        for user_account in accts['accounts']:
+            if user_account['type']['value'] == acct_type:
+                account_id = user_account['id']
+                break
+        return get_transactions_from_account(account_id, user_id)
+    else:
+        return None
+    
+    return all_transacs
