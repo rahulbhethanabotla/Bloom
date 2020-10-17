@@ -11,8 +11,8 @@ def get_user_accounts(user_id):
     payload = {}
     # need to remember to consistently update this
     headers = {
-        'Authorization': 'Bearer D3SwtlumsU8iFC8PK8ao3pD3TLlH',
-        'transactionId': 'c625c9aa-fc9f-473a-bd19-9f0870bcb134',
+        'Authorization': 'Bearer 18MjUvvObCANTdpwsKIwVGY63UVA',
+        'transactionId': 'dcb9f3bb-f8a1-4002-a1a2-acf049c8bac0',
         'Accept': 'application/json'
     }
 
@@ -28,8 +28,8 @@ def get_user_account(account_id, user_id):
         str(account_id) + "?hostUserId=" + str(user_id)
     payload = {}
     headers = {
-        'Authorization': 'Bearer D3SwtlumsU8iFC8PK8ao3pD3TLlH',
-        'transactionId': 'fdd1542a-bcfd-439b-a6a1-5a064023b0ce',
+        'Authorization': 'Bearer 18MjUvvObCANTdpwsKIwVGY63UVA',
+        'transactionId': 'dcb9f3bb-f8a1-4002-a1a2-acf049c8bac0',
         'Accept': 'application/json'
     }
 
@@ -46,8 +46,8 @@ def get_transactions_from_account(account_id, user_id):
         str(account_id) + "&hostUserId=" + str(user_id)
     payload = {}
     headers = {
-        'Authorization': 'Bearer D3SwtlumsU8iFC8PK8ao3pD3TLlH',
-        'transactionId': 'fdd1542a-bcfd-439b-a6a1-5a064023b0ce',
+        'Authorization': 'Bearer 18MjUvvObCANTdpwsKIwVGY63UVA',
+        'transactionId': 'dcb9f3bb-f8a1-4002-a1a2-acf049c8bac0',
         'Accept': 'application/json'
     }
 
@@ -59,4 +59,5 @@ print(get_user_accounts("HACKATHONUSER250"))
 print("\n\n\n\n\n\n")
 print(get_user_account("RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs", "HACKATHONUSER250"))
 print("\n\n\n\n\n\n")
-print(get_transactions_from_account("RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs", "HACKATHONUSER250"))
+print(get_transactions_from_account(
+    "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs", "HACKATHONUSER250"))
