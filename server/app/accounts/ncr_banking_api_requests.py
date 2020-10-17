@@ -18,7 +18,6 @@ def get_user_accounts(user_id):
         'Accept': 'application/json'
     }
     response = requests.request("GET", url, headers=headers, data=payload)
-    print(response.status_code)
     return response.json()
 #########################################################################################################################
 
@@ -65,12 +64,15 @@ def get_transactions_from_account(account_id, user_id):
 
 def get_all_transactions_for_a_user(user_id):
     all_transacs = dict()
-    all_transacs["all_transactions"] = []
-    for user_account in get_user_accounts(user_id)['accounts']:
-        account_id = user_account['id']
-        transactions_for_acct = get_transactions_from_account(account_id, user_id)
-        all_transacs["all_transactions"] += [transactions_for_acct]
-    return json.dumps(all_transacs)
+    all_transacs[user_id] = []
+    accts = get_user_accounts(user_id)
+    if 'accounts' in accts:
+        for user_account in accts['accounts']:
+            account_id = str(user_account['id'])
+            transactions_for_acct = get_transactions_from_account(account_id, user_id)
+            all_transacs[user_id] += [transactions_for_acct]
+    
+    return all_transacs
 
 #########################################################################################################################
 
@@ -79,15 +81,14 @@ def get_all_transactions_for_a_user(user_id):
 def get_all_transactions_for_all_users():
     all_user_transactions = dict()
     all_user_transactions["transactions"] = []
-    user_id = "HACKATHONUSER"
-    for i in range(300):
-        user_id += str(i).zfill(3)
+    for i in range(1, 300):
+        user_id = "HACKATHONUSER" + str(i).zfill(3)
         user_transactions = dict()
         user_transactions[user_id] = get_all_transactions_for_a_user(user_id)
-        all_user_transactions["transactions"] += user_transactions
-    return all_user_transactions
+        all_user_transactions["transactions"] += [user_transactions[user_id]]
+        
+    with open('all_users_all_transactions.json', 'w') as outfile:
+        json.dump(all_user_transactions, outfile)
 
 
-# print(get_all_transactions_for_all_users())
-print(get_user_accounts("HACKATHONUSER00"))
-print(get_user_accounts("HACKATHONUSER101"))
+get_all_transactions_for_all_users()
