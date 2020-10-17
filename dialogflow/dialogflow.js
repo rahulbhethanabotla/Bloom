@@ -131,8 +131,8 @@ function buildChatResponse(message) {
 
 function sendMedia(mediaUrl, phoneNumberFrom, phoneNumberTo) {
     console.log("SENDING MEDIA");
-    const accountSID = "AC19a51e2c4b2942c909ca6946e3590778";
-    const authToken = "2d8ab5b8d9b10c265cbd5d6c6bce8a62";
+    const accountSID = "ACCOUNTSID";
+    const authToken = "AUTHTOKEN";
 
     const authorization = base64encode(`${accountSID}:${authToken}`);
     const body = {
