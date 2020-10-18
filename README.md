@@ -1,2 +1,2 @@
 # Bloom
-rahul plays around for a bit
+Your personal financial advisor, just one text away
