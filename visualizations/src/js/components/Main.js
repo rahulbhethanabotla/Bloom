@@ -13,7 +13,7 @@ export default class Main extends React.Component {
         <NavBar />
         <PageHeader
           title={"Visualizations"}
-          subtext={"Charts on sales and predictive data."}
+          subtext={"Charts on portfolio and savings data."}
         />
         <ContentHolder />
       </div>

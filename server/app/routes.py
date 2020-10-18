@@ -112,7 +112,7 @@ def get_full_name():
 
 @app.route("/graphs/portfolio/performance")
 def get_portfolio_performance_chart():
-    phone = request.args['phone']  # TODO: change back
+    phone = request.headers['phone']
     return json.dumps(blackrock.get_portfolio_performance_chart_data(accounts_analysis.get_portfolio(phone)))
 
 
@@ -135,7 +135,10 @@ def get_portfolio_stats():
 
 @app.route("/graphs/stock/performance")
 def get_stock_performance_chart():
-    company = translate_ticker(request.headers['company'])
+    if 'ticker' in request.headers:
+        company = request.headers['ticker']
+    else:
+        company = translate_ticker(request.headers['company'])
     return json.dumps(blackrock.get_performance_chart_for_one_stock(company))
 
 

@@ -14,48 +14,60 @@ export default class CheckingsStats extends React.Component {
     this.state = {
       dataPoints: []
     };
-    CanvasJS.addColorSet("niceColors", [
-      "#C8A1D6",
-      "#B096C8",
-      "#9A8CB9",
-      "#8481AA",
-      "#70769A",
-      "#5E6A8A",
-      "#4D5F7A",
-      "#3D546A",
-      "#2F485A",
-      "#233D4A",
-      "#18313B",
-      "#0F262D"
-    ]);
 
     this.chart = React.createRef();
   }
 
   componentDidMount = async () => {
-    const rangesEndpoint = `${endpoints.queryEndpoint}accounts/checkings`;
-    const response = await fetch(rangesEndpoint);
+    const checkingsEndpoint = `${endpoints.queryEndpoint}accounts/checkings`;
+    const response = await fetch(checkingsEndpoint, {
+      headers: {
+        phone: this.props.phone_number
+      }
+    });
     const user = await response.json();
 
-    console.log("User: ", user);
-
-    const dataPoints = [];
+    const collected_transactions = {};
 
     for (const {date, amount} of user.transactions) {
-        dataPoints.push({ x: new Date(date), y: amount });  
+        const date_obj = new Date(date).toDateString();
+        if (date_obj in collected_transactions) {
+          collected_transactions[date_obj] += amount;
+        } else {
+          collected_transactions[date_obj] = amount;
+        }
     }
 
-    console.log(dataPoints);
+    const sorted_transactions = Object.entries(collected_transactions).sort(([a,],[b,]) => new Date(a) - new Date(b));
+
+    const sum_transactions = [];
+    let sum = 0;
+
+    for(const x of sorted_transactions){
+        sum += x[1];
+        sum_transactions.push(sum);
+    }
+
+    const dates = sorted_transactions.map(x => x[0]);
+    const daily_transactions = sorted_transactions.map(x => x[1]);
+
+    const daily_data = [];
+    const sum_data = [];
+
+    for(let i = 0; i < dates.length; i++) {
+      daily_data.push({label: dates[i], y: daily_transactions[i]});
+      sum_data.push({label: dates[i], y: sum_transactions[i]});
+    }
 
     this.setState({
-      dataPoints
+      daily_data,
+      sum_data
     });
   };
 
   render() {
     const options = {
       theme: "light1",
-      colorSet: "niceColors",
       exportEnabled: true,
       animationEnabled: true,
       title: {
@@ -71,12 +83,22 @@ export default class CheckingsStats extends React.Component {
       },
       data: [
         {
-          type: "scatter",
-          markerSize: "15",
+          type: "stackedColumn",
+          name: "Daily Transactions",
+          color: "#e6739f",
+          showInLegend: true,
         //   indexLabel: "{y[#index]}$",
-          toolTipContent:
-            "<strong>Date: {x}</strong></br> Transaction: {y}$",
-          dataPoints: this.state.dataPoints
+          toolTipContent: "<strong>Date: {x}</strong></br> Transaction: {y}$",
+          dataPoints: this.state.daily_data
+        },
+        {
+          type: "stackedColumn",
+          name: "Total Transactions",
+          color: "#790c5a",
+          showInLegend: true,
+        //   indexLabel: "{y[#index]}$",
+          toolTipContent: "<strong>Date: {x}</strong></br> Transaction: {y}$",
+          dataPoints: this.state.sum_data
         }
       ]
     };

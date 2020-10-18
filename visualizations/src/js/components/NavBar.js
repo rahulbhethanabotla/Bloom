@@ -8,7 +8,7 @@ const NavBar = () => {
   return (
     <div id="navBar">
       <img src={logo} alt="LOGO" />
-      <h2>Bazaar</h2>
+      <h2>Bloom</h2>
       <h2>Analytics</h2>
     </div>
   );
