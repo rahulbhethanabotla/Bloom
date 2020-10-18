@@ -140,9 +140,9 @@ def get_stock_performance_chart():
 
 @app.route("/stock.png")
 def stock_png():
-    phone = request.args['company']
+    company = request.args['company']
     data = blackrock.get_performance_chart_for_one_stock(company)
-    img = charts.chart_portfolio_performance(data)
+    img = charts.chart_stock_performance(data)
     return send_file(img,
                      attachment_filename='stock.png',
                      mimetype='image/png')
