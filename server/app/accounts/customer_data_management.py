@@ -62,3 +62,6 @@ update_customer_data({'portfolio': [('AAPL', 30.2)]}, "HACKATHONUSER107")
 def get_all_customers():
     db.all()
 
+def get_customer(username):
+    customer = Query()
+    return db.search(customer.profileUsername == username)
