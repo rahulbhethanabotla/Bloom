@@ -83,7 +83,7 @@ def set_up_accounts(phone):
         "income": savings
     }
 
-    print(json.dumps(user_accounts))
+    # print(json.dumps(user_accounts))
 
 
 def get_checkings_stats(phone):
@@ -144,9 +144,9 @@ def get_savings_breakdown(phone):
         }
 
 def get_portfolio(phone):
-    print(get_username(phone))
+    # print(get_username(phone))
     customer_data = customer_data_management.get_customer(get_username(phone))
-    print(customer_data)
+    # print(customer_data)
     return {"portfolio": customer_data["portfolio"]}
 
 
