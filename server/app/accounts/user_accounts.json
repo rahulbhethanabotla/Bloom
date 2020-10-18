@@ -1,0 +1,122 @@
+{
+  "HACKATHONUSER001": {
+    "checkings": {
+      "id": "rf5ao6Qclwsth9OfOvUb-EeV1m2BfmTzUEALGLQ3ehU",
+      "balance": 3000.0,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 64.33 },
+        { "date": "2020-10-16", "amount": 100.03 },
+        { "date": "2020-10-15", "amount": 521.03 },
+        { "date": "2020-10-14", "amount": 45.13 },
+        { "date": "2020-10-13", "amount": 44.82 },
+        { "date": "2020-10-12", "amount": 134.33 },
+        { "date": "2020-09-17", "amount": 1.45 }
+      ],
+      "expenditures": 911.12
+    },
+    "savings": {
+      "id": "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs",
+      "balance": 26666.96,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 20.33 },
+        { "date": "2020-10-16", "amount": 400.03 },
+        { "date": "2020-10-15", "amount": 2123.0 },
+        { "date": "2020-10-14", "amount": 135.0 },
+        { "date": "2020-10-13", "amount": 446.82 },
+        { "date": "2020-10-12", "amount": 1334.33 },
+        { "date": "2020-09-17", "amount": 100.45 }
+      ],
+      "income": 4559.96
+    }
+  },
+  "HACKATHONUSER074": {
+    "checkings": {
+      "id": "rf5ao6Qclwsth9OfOvUb-EeV1m2BfmTzUEALGLQ3ehU",
+      "balance": 300.0,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 2.33 },
+        { "date": "2020-10-16", "amount": 40.03 },
+        { "date": "2020-10-15", "amount": 22.0 },
+        { "date": "2020-10-14", "amount": 13.0 },
+        { "date": "2020-10-13", "amount": 44.82 },
+        { "date": "2020-10-12", "amount": 134.33 },
+        { "date": "2020-09-17", "amount": 0.44 }
+      ],
+      "expenditures": 256.95
+    },
+    "savings": {
+      "id": "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs",
+      "balance": 266.96,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 2.33 },
+        { "date": "2020-10-16", "amount": 40.03 },
+        { "date": "2020-10-15", "amount": 22.0 },
+        { "date": "2020-10-14", "amount": 13.0 },
+        { "date": "2020-10-13", "amount": 44.82 },
+        { "date": "2020-10-12", "amount": 134.33 },
+        { "date": "2020-09-17", "amount": 0.45 }
+      ],
+      "income": 256.96
+    }
+  },
+  "HACKATHONUSER076": {
+    "checkings": {
+      "id": "rf5ao6Qclwsth9OfOvUb-EeV1m2BfmTzUEALGLQ3ehU",
+      "balance": 33027.0,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 32.33 },
+        { "date": "2020-10-16", "amount": 410.03 },
+        { "date": "2020-10-15", "amount": 229.0 },
+        { "date": "2020-10-14", "amount": 1353.13 },
+        { "date": "2020-10-13", "amount": 589.82 },
+        { "date": "2020-10-12", "amount": 111.33 },
+        { "date": "2020-09-17", "amount": 78.45 }
+      ],
+      "expenditures": 2804.09
+    },
+    "savings": {
+      "id": "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs",
+      "balance": 2660000.96,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 233.00 },
+        { "date": "2020-10-16", "amount": 4003.12 },
+        { "date": "2020-10-15", "amount": 220.13 },
+        { "date": "2020-10-14", "amount": 1233.0 },
+        { "date": "2020-10-13", "amount": 444.82 },
+        { "date": "2020-10-12", "amount": 134.33 },
+        { "date": "2020-09-17", "amount": 11.45 }
+      ],
+      "income": 6279.85
+    }
+  },
+  "HACKATHONUSER126": {
+    "checkings": {
+      "id": "rf5ao6Qclwsth9OfOvUb-EeV1m2BfmTzUEALGLQ3ehU",
+      "balance": 80000.0,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 2000.33 },
+        { "date": "2020-10-16", "amount": 400.03 },
+        { "date": "2020-10-15", "amount": 229.0 },
+        { "date": "2020-10-14", "amount": 1300.0 },
+        { "date": "2020-10-13", "amount": 4400.82 },
+        { "date": "2020-10-12", "amount": 1304.33 },
+        { "date": "2020-09-17", "amount": 1000.45 }
+      ],
+      "expenditures": 10634.96
+    },
+    "savings": {
+      "id": "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs",
+      "balance": 120066.96,
+      "transactions": [
+        { "date": "2020-10-17", "amount": 4000.33 },
+        { "date": "2020-10-16", "amount": 8000.3},
+        { "date": "2020-10-15", "amount": 2020.0 },
+        { "date": "2020-10-14", "amount": 1300.0 },
+        { "date": "2020-10-13", "amount": 4413.82 },
+        { "date": "2020-10-12", "amount": 1344.33 },
+        { "date": "2020-09-17", "amount": 1279.45 }
+      ],
+      "income": 22358.23
+    }
+  }
+}

@@ -1,10 +1,25 @@
 import requests
 import json
-import time
+import tqdm
 
 #########################################################################################################################
 # user_id:  written as HACKATHONUSER*** from 100 to 299 (101 doesn't seem to work for some reason?)
 
+def save_valid_users():
+    with open("all_users_all_transactions.json") as json_file:
+        all_users_all_transactions = json.load(json_file)
+
+        valid_users = []
+        invalid_users = []
+        for item in tqdm.tqdm(all_users_all_transactions["transactions"]):
+            username, transactions = list(item.items())[0]
+            if len(transactions) > 0:
+                valid_users.append(username)
+            else:
+                invalid_users.append(username)
+
+        with open('users.json', 'w') as outfile:
+            json.dump({"valid": valid_users, "invalid": invalid_users}, outfile)
 
 def get_user_accounts(user_id):
     url = "http://ncrdev-dev.apigee.net/digitalbanking/db-accounts/v1/accounts?hostUserId=" + \
