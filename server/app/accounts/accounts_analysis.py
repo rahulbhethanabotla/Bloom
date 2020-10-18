@@ -138,11 +138,10 @@ def get_savings_breakdown(phone):
     score = min(((savings / income) / .20) * 100, 100)
 
     return {
-        "monthlySavings": savings,
-        "savingsScore": {"score": score, "classAverage": 83},
-        "savingsGoal": 28
-    }
-
+            "monthlySavings" : {"score": savings, "classAverage": .80*savings},
+            "savingsScore" : {"score": score, "classAverage": 83},
+            "savingsGoal": 28
+        }
 
 def get_portfolio(phone):
     print(get_username(phone))
