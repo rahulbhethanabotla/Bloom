@@ -8,7 +8,6 @@ known_numbers = {
     "4082013554" : "HACKATHONUSER074",
     "2019535950" : "HACKATHONUSER076",
     "7323109043" : "HACKATHONUSER126"
-
 }
 user_accounts = dict()
 
@@ -26,9 +25,6 @@ def get_username(phone):
         username = "HACKATHONUSER001"
     return username
 
-def get_full_name(phone):
-    # query the ncr buisness api to get name
-    return 0
 
 def display_accounts():
     for number in known_numbers.keys():
@@ -114,7 +110,7 @@ def get_purchase_breakdown(phone):
     small = sum(purchases[: int(.25*len(purchases))])
     total = sum(purchases)
     return {
-            "largePurchasePercent" : {"score": (100 * large) / total, "classAverage": 80},
+            "largePurchasePercent" : {"score": (100 * large) / total, "classAverage": 85},
             "smallPurchasePercent": {"score": (100 * small) / total, "classAverage": 15}
         }
 
@@ -131,4 +127,12 @@ def get_savings_breakdown(phone):
         }
 
 def get_portfolio(phone):
-    return 0
+    print(get_username(phone))
+    customer_data = customer_data_management.get_customer(get_username(phone))
+    print(customer_data)
+    return {"portfolio": customer_data["portfolio"]}
+
+def get_full_name(phone):
+    # query the ncr buisness api to get name
+    customer_data = customer_data_management.get_customer(get_username(phone))
+    return {"firstName": customer_data["firstName"], "lastName": customer_data["lastName"]}

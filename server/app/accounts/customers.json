@@ -1,1 +1,43 @@
-{"_default": {"1": {"profileUsername": "HACKATHONUSER107", "firstName": "Bobby", "lastName": "Dean", "phone": "4082013554", "savingsGoal": 180.34, "portfolio": [["AAPL", 30.2]]}}}
+{
+  "_default": {
+    "1": {
+      "profileUsername": "HACKATHONUSER001",
+      "firstName": "Bobby",
+      "lastName": "Dean",
+      "phone": "4048842018",
+      "savingsGoal": 180.34,
+      "portfolio": [["AAPL", 30.2]]
+    },
+    "2": {
+      "profileUsername": "HACKATHONUSER074",
+      "firstName": "Tom",
+      "lastName": "Benson",
+      "phone": "4082013554",
+      "savingsGoal": "70.45",
+      "portfolio": [
+        ["SNAP", 50],
+        ["AAPL", 50]
+      ]
+    },
+    "3": {
+      "profileUsername": "HACKATHONUSER076",
+      "firstName": "Lila",
+      "lastName": "Carlson",
+      "phone": "2019535950",
+      "savingsGoal": "10.45",
+      "portfolio": [
+        ["MCD", 60.45],
+        ["ZM", 100.32],
+        ["HON", 2.33]
+      ]
+    },
+    "4": {
+      "profileUsername": "HACKATHONUSER126",
+      "firstName": "Kim",
+      "lastName": "Wattson",
+      "phone": "7323109043",
+      "savingsGoal": "7.63",
+      "portfolio": [["AAPL", 3.45]]
+    }
+  }
+}

@@ -37,7 +37,9 @@ def create_customer(username, first_name, last_name, phone, savings_goal, portfo
     
 
 
-#create_customer("HACKATHONUSER107", "Jimmy", "Dean", "4082013554", "180.45", ["AAPL", 3.45])
+# create_customer("HACKATHONUSER074", "Tom", "Benson", "4082013554", "70.45", [["AMZN", 33.45],["MSFT", 6.32]])
+# create_customer("HACKATHONUSER076", "Lila", "Carlson", "2019535950", "10.45", [["MCD", 60.45], ["ZM", 100.32], ["HON", 2.33]])
+# create_customer("HACKATHONUSER126", "Kim", "Wattson", "7323109043", "7.63", [["IBM", 3.45], ["TGT",]])
 
 
 
@@ -57,11 +59,12 @@ def update_customer_data(payload, customer_username):
     response = requests.request("PUT", url, headers=headers, data = payload)
 
 
-update_customer_data({'portfolio': [('AAPL', 30.2)]}, "HACKATHONUSER107")
+# update_customer_data({'portfolio': [('AAPL', 30.2)]}, "HACKATHONUSER107")
 
 def get_all_customers():
     db.all()
 
 def get_customer(username):
     customer = Query()
-    return db.search(customer.profileUsername == username)
+    print(customer)
+    return db.search(customer.profileUsername == username)[0]
