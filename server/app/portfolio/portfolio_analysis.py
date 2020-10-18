@@ -27,19 +27,19 @@ def get_portfolio_metrics():
 
 def buy(ticker, amount):
     """
-    update porfolio with new purchase
+    update portfolio with new purchase
     """
     return 0
 
 def sell(ticker, amount):
     """
-    update porfolio with new sell
+    update portfolio with new sell
     """
     return 0
 
 def set_portfolio(portfolio)
     """
-    set porfolio to a list fo stocks/amounts
+    set portfolio to a list fo stocks/amounts
     """
     for stock, amount in portfolio:
         buy(stock, amount)

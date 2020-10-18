@@ -8,11 +8,24 @@ import json
 def get_portfolio_performance_chart_data(portfolio):
     url = "https://www.blackrock.com/tools/hackathon/portfolio-analysis?apiVersion=v1&calculateExpectedReturns=true&calculateExposures=true&calculatePerformance=true&calculateRisk=true&calculateStressTests=true&endDate=20201016&includeChartData=true&positions="
     startdateurl = "&startDate=20200101"
-    portfolio_url_string = ""
-    for position in portfolio:
-        portfolio_url_string += position[0] + "~" + str(position[1]) + "%7C"
-    portfolio_url_string = portfolio_url_string[:-3]
+    
+
+    portfolio_strings = []
+    for ticker, amount in portfolio["portfolio"]:
+        portfolio_strings.append("%s~%d" % (ticker, amount))
+
+    portfolio_url_string = "%7C".join(portfolio_strings)
+
+    # for position in portfolio:
+    #     portfolio_url_string += position[0] + "~" + str(position[1]) + "%7C"
+    # portfolio_url_string = portfolio_url_string[:-3]
+    print("PUS:", portfolio_url_string)
     url = url + portfolio_url_string + startdateurl
+    
+    for ticker, amount in portfolio["portfolio"]:
+        portfolio_strings.append("%s~%d" % (ticker, amount))
+    
+    print("|".join(portfolio_strings))
     payload = {
         "apiVersion" :  "v1",
         "calculateExpectedReturns" :  "true",
@@ -22,7 +35,7 @@ def get_portfolio_performance_chart_data(portfolio):
         "calculateStressTests" :  "true",
         "endDate" :  "20201016",
         "includeChartData" :  "true",
-        "positions" :  "AAPL~50|TWTR~50",
+        "positions" :  "|".join(portfolio_strings),
         "startDate" :  "20200101"
     }
     headers = {
@@ -30,6 +43,7 @@ def get_portfolio_performance_chart_data(portfolio):
     }
     response = requests.request('GET', url, headers=headers, data=payload)
     json_data = json.loads(response.text)
+    print(json_data['resultMap']['PORTFOLIOS'][0]['portfolios'][0].keys())
     performanceData = json_data['resultMap']['PORTFOLIOS'][0]['portfolios'][0]['returns']['performanceChart']
     json_PData = {
         "performanceData": performanceData
@@ -41,11 +55,24 @@ def get_portfolio_performance_chart_data(portfolio):
 def get_latest_performance(portfolio):
     url = "https://www.blackrock.com/tools/hackathon/portfolio-analysis?apiVersion=v1&calculateExpectedReturns=true&calculateExposures=true&calculatePerformance=true&calculateRisk=true&calculateStressTests=true&endDate=20201016&includeChartData=true&positions="
     startdateurl = "&startDate=20200101"
-    portfolio_url_string = ""
-    for position in portfolio:
-        portfolio_url_string += position[0] + "~" + str(position[1]) + "%7C"
-    portfolio_url_string = portfolio_url_string[:-3]
+    
+
+    portfolio_strings = []
+    for ticker, amount in portfolio["portfolio"]:
+        portfolio_strings.append("%s~%d" % (ticker, amount))
+
+    portfolio_url_string = "%7C".join(portfolio_strings)
+
+    # for position in portfolio:
+    #     portfolio_url_string += position[0] + "~" + str(position[1]) + "%7C"
+    # portfolio_url_string = portfolio_url_string[:-3]
+    print("PUS:", portfolio_url_string)
     url = url + portfolio_url_string + startdateurl
+    
+    for ticker, amount in portfolio["portfolio"]:
+        portfolio_strings.append("%s~%d" % (ticker, amount))
+    
+    print("|".join(portfolio_strings))
     payload = {
         "apiVersion" :  "v1",
         "calculateExpectedReturns" :  "true",
@@ -55,7 +82,7 @@ def get_latest_performance(portfolio):
         "calculateStressTests" :  "true",
         "endDate" :  "20201016",
         "includeChartData" :  "true",
-        "positions" :  "AAPL~50|TWTR~50",
+        "positions" :  "|".join(portfolio_strings),
         "startDate" :  "20200101"
     }
     headers = {
@@ -68,7 +95,7 @@ def get_latest_performance(portfolio):
         "oneMonthPerformance": latest_performance['oneMonth'],
         "oneDayPerformance": latest_performance['oneDay'],
         "growthLevelOverYear": latest_performance['level'],
-        "riskReturnRatio": latest_performance['oneYearSharpeRatio']
+        "riskReturnRatio": latest_performance['sinceStartDateSharpeRatio']
     }
     return json.dumps(info)
 
