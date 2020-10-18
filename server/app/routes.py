@@ -45,8 +45,12 @@ def get_checkings():
 
 @app.route("/plot.png")
 def plot_png():
+    if(bool(request.args['phone'])):
+        phone = request.args['phone']
+    else:
+        phone = request.headers['phone']
     img = charts.chart_checking_account(
-        accounts_analysis.get_checkings_stats("7323109043"))
+        accounts_analysis.get_checkings_stats(phone))
     return send_file(img,
                      attachment_filename='plot.png',
                      mimetype='image/png')
