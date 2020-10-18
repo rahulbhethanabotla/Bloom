@@ -85,5 +85,9 @@ def get_stock_performance_chart():
 
 @app.route("/graphs/stock/stats")
 def get_stock_stats():
-    company = translate_ticker(request.headers['company'])
+    company = ''
+    if 'ticker' in request.headers:
+        company = request.headers['ticker']
+    else:
+        company = translate_ticker(request.headers['company'])
     return json.dumps(blackrock.get_latest_performance_for_one_stock(company))

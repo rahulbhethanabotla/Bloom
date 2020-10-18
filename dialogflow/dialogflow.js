@@ -17,12 +17,15 @@ const endpoints = {
     getCatagory: '/accounts/metrics/category',
     getPurchaseMetrics: '/accounts/metrics/purchases',
     getSavingsMetrics: '/accounts/metrics/savings',
+    getPortfolioStats: '/graphs/portfolio/stats',
+    getStockStats: '/graphs/stock/stats'
 };
+
 const stocks = {
     Energy: ['Chevron Corporation', 'CVX'],
     Materials: ['Newmont Corp', 'NEM'],
     Industrials: ['FedEx Corp', 'FDX'],
-    Financials: ['JPMorgan Chase & Co.', 'JPM'],
+    Financials: ['BlackRock, Inc.', 'BLK'],
     Health: ['Biogen Inc.', 'BIB'],
     Technology: ['NCR Corporation', 'NCR'],
     Housing: ['Equity Commonwealth', 'EQC'],
@@ -57,12 +60,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
     }
 
     async function accountHistoryMoreHandler(agent) {
+        console.log("INSIDE MORE HISTORY")
         let purchaseMetrics = await fetch(`${baseUrl}${endpoints.getPurchaseMetrics}`, {
             method: 'get',
             headers: { "phone": data.phoneNumberFrom },
         });
         let metricsJson = await purchaseMetrics.json();
-        
+        console.log("PURCHASE METRICS ", JSON.stringify(metricsJson))
+
         const largePercent = metricsJson.largePurchasePercent.score
         const smallPercent = metricsJson.smallPurchasePercent.score
 
@@ -164,14 +169,19 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
         agent.add(message)
     }
 
-    function investRecMoreHandler(agent) {
+    async function investRecMoreHandler(agent) {
         let industry = data.parameters.industry
         let nameAndTicker = stocks[industry]
 
         let name = nameAndTicker[0]
         let ticker = nameAndTicker[1]
+
+        let stockInfo = await fetch(`${baseUrl}${endpoints.getStockStats}`, {
+            method: 'get',
+            headers: { "ticker": ticker },
+        })
+        let stockInfoJson = await stockInfo.json()
         
-        // TODO: get information about the stock
 
         let message = `here is some more infromation about the ${name}`
         agent.add(message)
@@ -182,7 +192,12 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
             return
         }
         let stock = data.parameters.stock.toLowerCase()
-        // TODO: Call to get stock information
+        let stockInfo = await fetch(`${baseUrl}${endpoints.getStockStats}`, {
+            method: 'get',
+            headers: { "company": stock },
+        })
+        let stockInfoJson = await stockInfo.json()
+
 
         let message = `Here is what I was able to find about ${stock}`
         agent.add(message)
