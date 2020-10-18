@@ -138,14 +138,13 @@ def get_stock_performance_chart():
     return json.dumps(blackrock.get_performance_chart_for_one_stock(company))
 
 
-@app.route("/performance.png")
-def performance_png():
-    phone = request.args['phone']
-    data = blackrock.get_portfolio_performance_chart_data(
-        accounts_analysis.get_portfolio(phone))
+@app.route("/stock.png")
+def stock_png():
+    phone = request.args['company']
+    data = blackrock.get_performance_chart_for_one_stock(company)
     img = charts.chart_portfolio_performance(data)
     return send_file(img,
-                     attachment_filename='performance.png',
+                     attachment_filename='stock.png',
                      mimetype='image/png')
 
 
