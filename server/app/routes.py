@@ -115,14 +115,14 @@ def get_portfolio_performance_chart():
     return json.dumps(blackrock.get_portfolio_performance_chart_data(accounts_analysis.get_portfolio(phone)))
 
 
-@app.route("/performance.png")
-def performance_png():
+@app.route("/portfolio.png")
+def portfolio_png():
     phone = request.args['phone']
     data = blackrock.get_portfolio_performance_chart_data(
         accounts_analysis.get_portfolio(phone))
     img = charts.chart_portfolio_performance(data)
     return send_file(img,
-                     attachment_filename='performance.png',
+                     attachment_filename='portfolio.png',
                      mimetype='image/png')
 
 
@@ -136,6 +136,18 @@ def get_portfolio_stats():
 def get_stock_performance_chart():
     company = translate_ticker(request.headers['company'])
     return json.dumps(blackrock.get_performance_chart_for_one_stock(company))
+
+
+@app.route("/performance.png")
+def performance_png():
+    phone = request.args['phone']
+    data = blackrock.get_portfolio_performance_chart_data(
+        accounts_analysis.get_portfolio(phone))
+    img = charts.chart_portfolio_performance(data)
+    return send_file(img,
+                     attachment_filename='performance.png',
+                     mimetype='image/png')
+
 
 
 @app.route("/graphs/stock/stats")
