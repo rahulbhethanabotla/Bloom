@@ -78,7 +78,7 @@ def chart_purchase_breakdown(breakdown: dict):
         breakdown["smallPurchasePercent"]["classAverage"], size=otherSize)
 
     data = pd.DataFrame({"A": ["small", "large"], "B": [
-                        smallUser, largeUser], "C": ["user", "user"]})
+                        smallUser, largeUser], "C": ["you", "you"]})
 
     for i in range(otherSize):
         frame = pd.DataFrame(
