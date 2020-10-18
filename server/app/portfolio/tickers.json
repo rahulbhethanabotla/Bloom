@@ -25,7 +25,7 @@
   "Johnson & Johnson": { "cik_str": 200406, "ticker": "JNJ", "title": "JOHNSON & JOHNSON" },
   "Procter & Gamble": { "cik_str": 80424, "ticker": "PG", "title": "PROCTER & GAMBLE Co" },
   "Mastercard": { "cik_str": 1141391, "ticker": "MA", "title": "Mastercard Inc" },
-  "NVIDIA": { "cik_str": 1045810, "ticker": "NVDA", "title": "NVIDIA CORP" },
+  "Nvidia": { "cik_str": 1045810, "ticker": "NVDA", "title": "NVIDIA CORP" },
   "Home Depot": { "cik_str": 354950, "ticker": "HD", "title": "HOME DEPOT, INC." },
   "United Health": {
     "cik_str": 731766,
