@@ -109,13 +109,13 @@ def chart_portfolio_performance(pData: dict):
     sns.set_theme()
     palette = sns.color_palette("mako_r", 6)
     performance = np.array(pData["performanceData"])
-    value = list(map(get_date, performance[:, 0]))
+    dates = list(map(get_date, performance[:, 0]))
     change = performance[:, 1]
 
-    data = pd.DataFrame({"Value": value, "Change": change})
+    data = pd.DataFrame({"Dates": dates, "Change": change})
 
     f, ax = plt.subplots()
-    sns.lineplot(data=data, x="Value", y="Change", palette=palette)
+    sns.lineplot(data=data, x="Dates", y="Change", color="maroon")
     ax.set_title("Portfolio Performance",
                  fontname="geneva", fontsize=20)
     format_ax(ax)
@@ -127,20 +127,20 @@ def chart_portfolio_performance(pData: dict):
     return img
 
 
-def chart_stock_performance(pData: dict):
+def chart_stock_performance(pData: dict, company: str):
     def get_date(milli):
         return datetime.fromtimestamp(milli/1000).strftime("%b")
     sns.set_theme()
     palette = sns.color_palette("mako_r", 6)
     performance = np.array(pData["performanceData"])
-    value = list(map(get_date, performance[:, 0]))
+    dates = list(map(get_date, performance[:, 0]))
     change = performance[:, 1]
 
-    data = pd.DataFrame({"Value": value, "Change": change})
+    data = pd.DataFrame({"Dates": dates, "Change": change})
 
     f, ax = plt.subplots()
-    sns.lineplot(data=data, x="Value", y="Change", palette=palette)
-    ax.set_title("Portfolio Performance",
+    sns.lineplot(data=data, x="Dates", y="Change", color="darkgreen")
+    ax.set_title(f"{company} Performance",
                  fontname="geneva", fontsize=20)
     format_ax(ax)
     ax.set(xlabel='')

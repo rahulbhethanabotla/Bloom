@@ -21,6 +21,7 @@ def fix_cap(company_name):
         result.append(word)
     return " ".join(result)
 
+
 def translate_ticker(name):
     if name in tickers:
         return name
@@ -62,17 +63,6 @@ def plot_png():
                      mimetype='image/png')
 
 
-@app.route("/purchase.png")
-def purchase_png():
-    phone = request.args['phone']
-
-    img = charts.chart_purchase_breakdown(
-        accounts_analysis.get_purchase_breakdown(phone))
-    return send_file(img,
-                     attachment_filename='purchase.png',
-                     mimetype='image/png')
-
-
 @app.route("/accounts/savings")
 def get_savings():
     phone = request.headers['phone']
@@ -89,6 +79,17 @@ def get_category():
 def get_purchase_breakdown():
     phone = request.headers['phone']
     return json.dumps(accounts_analysis.get_purchase_breakdown(phone))
+
+
+@app.route("/purchase.png")
+def purchase_png():
+    phone = request.args['phone']
+
+    img = charts.chart_purchase_breakdown(
+        accounts_analysis.get_purchase_breakdown(phone))
+    return send_file(img,
+                     attachment_filename='purchase.png',
+                     mimetype='image/png')
 
 
 @app.route("/accounts/metrics/savings")
@@ -140,13 +141,15 @@ def get_stock_performance_chart():
 
 @app.route("/stock.png")
 def stock_png():
-    company = request.args['company']
+    if 'ticker' in request.args:
+        company = request.args['ticker']
+    else:
+        company = translate_ticker(request.args['company'])
     data = blackrock.get_performance_chart_for_one_stock(company)
-    img = charts.chart_stock_performance(data)
+    img = charts.chart_stock_performance(data, company)
     return send_file(img,
                      attachment_filename='stock.png',
                      mimetype='image/png')
-
 
 
 @app.route("/graphs/stock/stats")
