@@ -29,18 +29,18 @@ const stocks = {
     Energy: ['Chevron Corporation', 'CVX'],
     Materials: ['Newmont Corp', 'NEM'],
     Industrials: ['FedEx Corp', 'FDX'],
-    Financials: ['BlackRock, Inc.', 'BLK'],
-    Health: ['Biogen Inc.', 'BIB'],
-    Technology: ['NCR Corporation', 'NCR'],
+    Financials: ['BlackRock, Inc', 'BLK'],
+    Health: ['Biogen Inc', 'BIB'],
+    Technology: [['NCR Corporation', 'NCR'], ['Alphabet Inc', 'GOOG'], ['Apple', 'AAPL'], ['Microsoft Corporation', 'MSFT'], ['Facebook', 'FB']],
     Housing: ['Equity Commonwealth', 'EQC'],
-    Telecommunication: ['Zoom Video Communications Inc.', 'ZM']
+    Telecommunication: ['Zoom Video Communications Inc.', 'ZM'],
+    Food: ['Beyond Meat', 'BYND']
 }
+let techIndex = 0
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request, response) => {
     const agent = new WebhookClient({ request, response });
     const data = parseDialogflowRequest(request);
-
-    console.log("NEW REQUEST", JSON.stringify(request.body))
 
     async function accountHistoryHandler(agent) {
         let checkingResponse = await fetch(`${baseUrl}${endpoints.getChecking}`, {
@@ -179,25 +179,35 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
             return
         }
         let industry = data.parameters.industry
-        let nameAndTicker = stocks[industry]
+        let nameAndTicker
+        if (industry === 'Technology') {
+            let techStocks = stocks[industry]
+            techIndex = Math.floor(Math.random() * techStocks.length)
+            nameAndTicker = techStocks[techIndex]
+        } else {
+            nameAndTicker = stocks[industry]
+        }
         
         let name = nameAndTicker[0]
         let ticker = nameAndTicker[1]
         
         let message = `For a ${industry.toLowerCase()} stock, I recommend that you look into ${name}.`
-        if (industry === 'Technology') {
-            message += ' I hear they are great at hackathons :)'
-        } else if (industry === 'Telecommunication') {
+        if (industry === 'Telecommunication') {
             message += ' You might of heard of this company from the term \"zoom university\".'
         }
-        message += ' Let me know if you would more information about this company.'
+        message += ' Let me know if you would like more information about this company.'
         agent.add(message)
     }
 
     async function investRecMoreHandler(agent) {
         let industry = data.parameters.industry
-        let nameAndTicker = stocks[industry]
-
+        let nameAndTicker
+        if (industry === 'Technology') {
+            nameAndTicker = stocks[industry][techIndex]
+        } else {
+            nameAndTicker = stocks[industry]
+        }
+        
         let name = nameAndTicker[0]
         let ticker = nameAndTicker[1]
 
@@ -228,12 +238,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
         })
         let stockInfoJson = await stockInfo.json()
         
-        console.log('Stock Perf', stockInfoJson, JSON.stringify(stockInfoJson))
         let dayPerf = stockInfoJson.oneDayPerformance.toFixed(3)
         let monthPerf = stockInfoJson.oneMonthPerformance.toFixed(3)
         let sharpeRatio = stockInfoJson.riskReturnRatioYear.toFixed(3)
-
-        console.log("STOCK PERF", dayPerf, monthPerf, sharpeRatio)
 
         let message = `${data.parameters.stock} stock had a return of ${dayPerf}% today and ${monthPerf}% over the past month. The stock has a Sharpe ratio of ${sharpeRatio}.`
         const graphUrl = `${baseUrl}${endpoints.stockGraph}?company=${encodeURI(stock)}`
@@ -242,13 +249,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
     }
 
     async function investPortfolioHandler(agent) {
-        console.log("IN PORTFOLIO")
         let portfolioResponse = await fetch(`${baseUrl}${endpoints.getPortfolioStats}`, {
             method: 'get',
             headers: { "phone": data.phoneNumberFrom },
         })
         let portfolioJson = await portfolioResponse.json()
-        console.log("Portfolio", portfolioJson, JSON.stringify(portfolioJson))
 
         let dayPerf = portfolioJson.oneDayPerformance.toFixed(3)
         let monthPerf = portfolioJson.oneMonthPerformance.toFixed(3)
@@ -293,8 +298,8 @@ function parseDialogflowRequest(request) {
 
 function sendMedia(mediaUrl, phoneNumberFrom, phoneNumberTo) {
     console.log("SENDING MEDIA");
-    const accountSID = "AC19a51e2c4b2942c909ca6946e3590778";
-    const authToken = "0767e30230f1053dddae91b5ed591c11";
+    const accountSID = "ACCOUNTSID";
+    const authToken = "AUTHTOKEN";
 
     const authorization = base64encode(`${accountSID}:${authToken}`);
     const body = {
