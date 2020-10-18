@@ -18,7 +18,11 @@ const endpoints = {
     getPurchaseMetrics: '/accounts/metrics/purchases',
     getSavingsMetrics: '/accounts/metrics/savings',
     getPortfolioStats: '/graphs/portfolio/stats',
-    getStockStats: '/graphs/stock/stats'
+    getStockStats: '/graphs/stock/stats',
+    purchaseGraph: '/purchase.png',
+    checkingGraph: '/checking.png',
+    portfolioGraph: '/portfolio.png',
+    stockGraph: '/stock.png'
 };
 
 const stocks = {
@@ -52,29 +56,30 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
             headers: { "phone": data.phoneNumberFrom },
         })
         let savingsJson = await savingsBreakdown.json()
-        const totalSavings = savingsJson.monthlySavings 
+        const totalSavings = savingsJson.monthlySavings.score
 
         const message = `You spent $${expenditures} and saved a total of $${totalSavings} last month. Your most recent transactions were on ${recentTransactions[0].date} for $${recentTransactions[0].amount} and on ${recentTransactions[1].date} for $${recentTransactions[1].amount}. Let me know if you want more information about your transation history.`;
+        const graphUrl = `${baseUrl}${endpoints.checkingGraph}?phone=${data.phoneNumberFrom}`
+        sendMedia(graphUrl, data.phoneNumberTo, data.phoneNumberFrom);
         agent.add(message);
-        // sendMedia('https://avatars1.githubusercontent.com/u/36980416?s=200&v=4', data.phoneNumberTo, data.phoneNumberFrom);
     }
 
     async function accountHistoryMoreHandler(agent) {
-        console.log("INSIDE MORE HISTORY")
         let purchaseMetrics = await fetch(`${baseUrl}${endpoints.getPurchaseMetrics}`, {
             method: 'get',
             headers: { "phone": data.phoneNumberFrom },
         });
         let metricsJson = await purchaseMetrics.json();
-        console.log("PURCHASE METRICS ", JSON.stringify(metricsJson))
 
-        const largePercent = metricsJson.largePurchasePercent.score
-        const smallPercent = metricsJson.smallPurchasePercent.score
+        const largePercent = metricsJson.largePurchasePercent.score.toFixed(2)
+        const smallPercent = metricsJson.smallPurchasePercent.score.toFixed(2)
 
         let message = `Of all your purchases last month, ${largePercent}% were large purchases and ${smallPercent}% were small purchases.`
         if (largePercent <= smallPercent) {
             message += ' Gotta be careful with the little things, sometimes they can really add up!'
         }
+        const graphUrl = `${baseUrl}${endpoints.purchaseGraph}?phone=${data.phoneNumberFrom}`
+        sendMedia(graphUrl, data.phoneNumberTo, data.phoneNumberFrom);
         agent.add(message)
     }
 
@@ -139,14 +144,34 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
         const userScore = savingsJson.savingsScore.score
         const classScore = savingsJson.savingsScore.classAverage
         const savingsGoal = savingsJson.savingsGoal
-        const totalSavings = savingsJson.monthlySavings
+        const totalSavings = savingsJson.monthlySavings.score
         let message = `You saved a total of $${totalSavings} last month. According to out state of the art Savings Score™, you have a score of ${userScore} while the average for people of similar income as you is ${classScore}.`
         if (userScore < classScore) {
-            message += ` We recommend that you save more money. You can start by changing your savings goals. Would you like me to do that?`
+            message += ` We really recommend that you save more money. You can start by changing your savings goals.`
         } else {
-            message += ` Basically, you're doing awesome! You're already great at saving, but it's never bad to save more. Would you like to change you savings goals?`
+            message += ` Basically, you're doing awesome! You're already great at saving, but it's never bad to save more.`
         }
         agent.add(message);
+    }
+
+    async function accountGoalHandler(agent) {
+        let savingsResponse = await fetch(`${baseUrl}${endpoints.getSavingsMetrics}`, {
+            method: 'get',
+            headers: { "phone": data.phoneNumberFrom },
+        })
+        let savingsJson = await savingsResponse.json()
+
+        const userScore = savingsJson.savingsScore.score
+        const totalSavings = savingsJson.monthlySavings.score
+        const savingsGoal = savingsJson.savingsGoal
+
+        let message = `You saved a total of $${totalSavings} last month. You had a savings goal of ${savingsGoal} and achieved a Savings Score™ of ${userScore} last month.`
+        if (savingsGoal > userScore) {
+            message += " It's ok, you can do better next month!"
+        } else {
+            message += " Awesome job! Have you considered investing some of those savings? You can get started right here, feel free to ask me a question about stocks!"
+        }
+        agent.add(message)
     }
 
     function investRecHandler(agent) {
@@ -182,8 +207,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
         })
         let stockInfoJson = await stockInfo.json()
         
+        let dayPerf = stockInfoJson.oneDayPerformance.toFixed(3)
+        let monthPerf = stockInfoJson.oneMonthPerformance.toFixed(3)
+        let sharpeRatio = stockInfoJson.riskReturnRatioYear.toFixed(3)
 
-        let message = `here is some more infromation about the ${name}`
+        let message = `${name} stock had a return of ${dayPerf}% today and ${monthPerf}% over the past month. The stock has a Sharpe ratio of ${sharpeRatio}.`
+        const graphUrl = `${baseUrl}${endpoints.stockGraph}?ticker=${ticker}`
+        sendMedia(graphUrl, data.phoneNumberTo, data.phoneNumberFrom);
         agent.add(message)
     }
 
@@ -197,15 +227,37 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
             headers: { "company": stock },
         })
         let stockInfoJson = await stockInfo.json()
+        
+        console.log('Stock Perf', stockInfoJson, JSON.stringify(stockInfoJson))
+        let dayPerf = stockInfoJson.oneDayPerformance.toFixed(3)
+        let monthPerf = stockInfoJson.oneMonthPerformance.toFixed(3)
+        let sharpeRatio = stockInfoJson.riskReturnRatioYear.toFixed(3)
 
+        console.log("STOCK PERF", dayPerf, monthPerf, sharpeRatio)
 
-        let message = `Here is what I was able to find about ${stock}`
+        let message = `${data.parameters.stock} stock had a return of ${dayPerf}% today and ${monthPerf}% over the past month. The stock has a Sharpe ratio of ${sharpeRatio}.`
+        const graphUrl = `${baseUrl}${endpoints.stockGraph}?company=${encodeURI(stock)}`
+        sendMedia(graphUrl, data.phoneNumberTo, data.phoneNumberFrom);
         agent.add(message)
     }
 
     async function investPortfolioHandler(agent) {
-        // Get portfolio data
-        let message = "Your portfolio is looking good!"
+        console.log("IN PORTFOLIO")
+        let portfolioResponse = await fetch(`${baseUrl}${endpoints.getPortfolioStats}`, {
+            method: 'get',
+            headers: { "phone": data.phoneNumberFrom },
+        })
+        let portfolioJson = await portfolioResponse.json()
+        console.log("Portfolio", portfolioJson, JSON.stringify(portfolioJson))
+
+        let dayPerf = portfolioJson.oneDayPerformance.toFixed(3)
+        let monthPerf = portfolioJson.oneMonthPerformance.toFixed(3)
+        let yearPerf = portfolioJson.growthLevelOverYear.toFixed(3)
+        let sharpeRatio = portfolioJson.riskReturnRatio.toFixed(3)
+
+        let message = `Your portfolio has a return of ${dayPerf}% today, ${monthPerf}% over the past month, and ${yearPerf}% over the past year. Your portfolio has a Sharpe ratio of ${sharpeRatio}.`
+        const graphUrl = `${baseUrl}${endpoints.portfolioGraph}?phone=${data.phoneNumberFrom}`
+        sendMedia(graphUrl, data.phoneNumberTo, data.phoneNumberFrom);
         agent.add(message)
     }
 
@@ -215,10 +267,11 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(async (request
     intentMap.set('account.amount', accountAmountHandler);
     intentMap.set('account.amount.specific', specificAccountAmountHandler);
     intentMap.set('account.recommendation', accountRecHandler);
+    intentMap.set('account.goal', accountGoalHandler);
     intentMap.set('investment.recommendation', investRecHandler);
     intentMap.set('investment.recommendation - more', investRecMoreHandler);
     intentMap.set('investment.stock', investStockHandler);
-    intentMap.set('investment.portfolio', investStockHandler);
+    intentMap.set('investment.portfolio', investPortfolioHandler);
     agent.handleRequest(intentMap);
 });
 
@@ -240,8 +293,8 @@ function parseDialogflowRequest(request) {
 
 function sendMedia(mediaUrl, phoneNumberFrom, phoneNumberTo) {
     console.log("SENDING MEDIA");
-    const accountSID = "ACCOUNTSID";
-    const authToken = "AUTHTOKEN";
+    const accountSID = "AC19a51e2c4b2942c909ca6946e3590778";
+    const authToken = "0767e30230f1053dddae91b5ed591c11";
 
     const authorization = base64encode(`${accountSID}:${authToken}`);
     const body = {
