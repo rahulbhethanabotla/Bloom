@@ -1,5 +1,5 @@
 import io
-import datetime
+from datetime import datetime
 import seaborn as sns
 import numpy as np
 import matplotlib
@@ -24,7 +24,7 @@ def chart_checking_account(user: dict):
     collected_transactions = {}
 
     for x in transactions:
-        date = datetime.datetime.strptime(x["date"], '%Y-%m-%d').date()
+        date = datetime.strptime(x["date"], '%Y-%m-%d').date()
         amount = x["amount"]
         if date in collected_transactions:
             collected_transactions[date] += amount
@@ -70,12 +70,13 @@ def chart_checking_account(user: dict):
 def chart_purchase_breakdown(breakdown: dict):
     sns.set_theme()
     otherSize = 40
+    std = 4
     largeUser = breakdown["largePurchasePercent"]["score"]
     smallUser = breakdown["smallPurchasePercent"]["score"]
     largeAverage = np.random.normal(
-        breakdown["largePurchasePercent"]["classAverage"], size=otherSize)
+        breakdown["largePurchasePercent"]["classAverage"], scale=std, size=otherSize)
     smallAverage = np.random.normal(
-        breakdown["smallPurchasePercent"]["classAverage"], size=otherSize)
+        breakdown["smallPurchasePercent"]["classAverage"], scale=std, size=otherSize)
 
     data = pd.DataFrame({"A": ["small", "large"], "B": [
                         smallUser, largeUser], "C": ["you", "you"]})
@@ -95,6 +96,30 @@ def chart_purchase_breakdown(breakdown: dict):
     ax.set(xlabel='Type of Purchase', ylabel='Percentage of Purchases')
     format_ax(ax)
     plt.legend(title="")
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    return img
+
+
+def chart_portfolio_performance(pData: dict):
+    def get_date(milli):
+        return datetime.fromtimestamp(milli/1000).strftime("%b")
+    sns.set_theme()
+    palette = sns.color_palette("mako_r", 6)
+    performance = np.array(pData["performanceData"])
+    value = list(map(get_date, performance[:, 0]))
+    change = performance[:, 1]
+
+    data = pd.DataFrame({"Value": value, "Change": change})
+
+    f, ax = plt.subplots()
+    sns.lineplot(data=data, x="Value", y="Change", palette=palette)
+    ax.set_title("Portfolio Performance",
+                 fontname="geneva", fontsize=20)
+    format_ax(ax)
+    ax.set(xlabel='')
 
     img = io.BytesIO()
     plt.savefig(img, format='png')

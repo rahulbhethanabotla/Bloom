@@ -111,8 +111,19 @@ def get_full_name():
 
 @app.route("/graphs/portfolio/performance")
 def get_portfolio_performance_chart():
-    phone = request.headers['phone']
+    phone = request.args['phone']  # TODO: change back
     return json.dumps(blackrock.get_portfolio_performance_chart_data(accounts_analysis.get_portfolio(phone)))
+
+
+@app.route("/performance.png")
+def performance_png():
+    phone = request.args['phone']
+    data = blackrock.get_portfolio_performance_chart_data(
+        accounts_analysis.get_portfolio(phone))
+    img = charts.chart_portfolio_performance(data)
+    return send_file(img,
+                     attachment_filename='performance.png',
+                     mimetype='image/png')
 
 
 @app.route("/graphs/portfolio/stats")
