@@ -6,8 +6,17 @@ from flask import request
 
 with open("app/portfolio/tickers.json") as json_file:
     ticker_mapping = json.load(json_file)
+
 tickers = set([value["ticker"] for key, value in ticker_mapping.items()])
 
+
+def fix_cap(company_name):
+    company_name = company_name.lower()
+    result = []
+    for word in company_name.split():
+        fixed_word = word[0].upper() + word[1:]
+        result.append(word)
+    return " ".join(result)
 
 def translate_ticker(name):
     if name in tickers:

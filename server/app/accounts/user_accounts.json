@@ -48,7 +48,7 @@
       "id": "RvHQVyPWntXOE0FurfM7vbj7MOfvn3iTFHrvIfv94bs",
       "balance": 266.96,
       "transactions": [
-        { "date": "2020-10-17", "amount": 2.33 },
+        { "date": "2020-10-17", "amount": 3.33 },
         { "date": "2020-10-16", "amount": 40.03 },
         { "date": "2020-10-15", "amount": 22.0 },
         { "date": "2020-10-14", "amount": 13.0 },
@@ -56,7 +56,7 @@
         { "date": "2020-10-12", "amount": 134.33 },
         { "date": "2020-09-17", "amount": 0.45 }
       ],
-      "income": 256.96
+      "income": 257.96
     }
   },
   "HACKATHONUSER076": {
