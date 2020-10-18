@@ -131,4 +131,4 @@ def get_savings_breakdown(phone):
         }
 
 def get_portfolio(phone):
-    return user["portfolio"]
+    return 0
