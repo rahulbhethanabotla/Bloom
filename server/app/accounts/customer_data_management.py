@@ -3,7 +3,7 @@ import json
 from tinydb import TinyDB, Query
 
 
-db = TinyDB('./customers.json')
+db = TinyDB('app/accounts/customers.json')
 
 
 ### username is 'HACKATHONUSER###'
