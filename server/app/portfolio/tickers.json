@@ -1,129 +1,205 @@
 {
-  "Apple": { "cik_str": 320193, "ticker": "AAPL", "title": "Apple Inc." },
-  "Amazon": { "cik_str": 1018724, "ticker": "AMZN", "title": "AMAZON COM INC" },
-  "Microsoft": { "cik_str": 789019, "ticker": "MSFT", "title": "MICROSOFT CORP" },
-  "Alphabet": { "cik_str": 1652044, "ticker": "GOOG", "title": "Alphabet Inc." },
-  "Alibaba": {
+  "apple": { "cik_str": 320193, "ticker": "AAPL", "title": "Apple Inc." },
+  "amazon": { "cik_str": 1018724, "ticker": "AMZN", "title": "AMAZON COM INC" },
+  "microsoft": {
+    "cik_str": 789019,
+    "ticker": "MSFT",
+    "title": "MICROSOFT CORP"
+  },
+  "alphabet": {
+    "cik_str": 1652044,
+    "ticker": "GOOG",
+    "title": "Alphabet Inc."
+  },
+  "alibaba": {
     "cik_str": 1577552,
     "ticker": "BABA",
     "title": "Alibaba Group Holding Ltd"
   },
-  "Facebook": { "cik_str": 1326801, "ticker": "FB", "title": "Facebook Inc" },
-  "Tencent": {
+  "facebook": { "cik_str": 1326801, "ticker": "FB", "title": "Facebook Inc" },
+  "tencent": {
     "cik_str": 1293451,
     "ticker": "TCEHY",
     "title": "Tencent Holdings Ltd"
   },
-  "Berkshire Hathaway": {
+  "berkshire hathaway": {
     "cik_str": 1067983,
     "ticker": "BRK-A",
     "title": "BERKSHIRE HATHAWAY INC"
   },
-  "Visa": { "cik_str": 1403161, "ticker": "V", "title": "VISA INC." },
-  "Walmart": { "cik_str": 104169, "ticker": "WMT", "title": "Walmart Inc." },
-  "Tesla": { "cik_str": 1318605, "ticker": "TSLA", "title": "Tesla, Inc." },
-  "Johnson & Johnson": { "cik_str": 200406, "ticker": "JNJ", "title": "JOHNSON & JOHNSON" },
-  "Procter & Gamble": { "cik_str": 80424, "ticker": "PG", "title": "PROCTER & GAMBLE Co" },
-  "Mastercard": { "cik_str": 1141391, "ticker": "MA", "title": "Mastercard Inc" },
-  "Nvidia": { "cik_str": 1045810, "ticker": "NVDA", "title": "NVIDIA CORP" },
-  "Home Depot": { "cik_str": 354950, "ticker": "HD", "title": "HOME DEPOT, INC." },
-  "United Health": {
+  "visa": { "cik_str": 1403161, "ticker": "V", "title": "VISA INC." },
+  "walmart": { "cik_str": 104169, "ticker": "WMT", "title": "Walmart Inc." },
+  "tesla": { "cik_str": 1318605, "ticker": "TSLA", "title": "Tesla, Inc." },
+  "johnson & johnson": {
+    "cik_str": 200406,
+    "ticker": "JNJ",
+    "title": "JOHNSON & JOHNSON"
+  },
+  "procter & gamble": {
+    "cik_str": 80424,
+    "ticker": "PG",
+    "title": "PROCTER & GAMBLE Co"
+  },
+  "mastercard": {
+    "cik_str": 1141391,
+    "ticker": "MA",
+    "title": "Mastercard Inc"
+  },
+  "nvidia": { "cik_str": 1045810, "ticker": "NVDA", "title": "NVIDIA CORP" },
+  "home depot": {
+    "cik_str": 354950,
+    "ticker": "HD",
+    "title": "HOME DEPOT, INC."
+  },
+  "united health": {
     "cik_str": 731766,
     "ticker": "UNH",
     "title": "UNITEDHEALTH GROUP INC"
   },
-  "JP Morgan": { "cik_str": 19617, "ticker": "JPM", "title": "JPMORGAN CHASE & CO" },
-  "Verizon": {
+  "jp morgan": {
+    "cik_str": 19617,
+    "ticker": "JPM",
+    "title": "JPMORGAN CHASE & CO"
+  },
+  "verizon": {
     "cik_str": 732712,
     "ticker": "VZ",
     "title": "VERIZON COMMUNICATIONS INC"
   },
-  "Adobe": { "cik_str": 796343, "ticker": "ADBE", "title": "ADOBE INC." },
-  "PayPal": {
+  "adobe": { "cik_str": 796343, "ticker": "ADBE", "title": "ADOBE INC." },
+  "paypal": {
     "cik_str": 1633917,
     "ticker": "PYPL",
     "title": "PayPal Holdings, Inc."
   },
-  "Netflix": { "cik_str": 1065280, "ticker": "NFLX", "title": "NETFLIX INC" },
-  "Salesforce": {
+  "netflix": { "cik_str": 1065280, "ticker": "NFLX", "title": "NETFLIX INC" },
+  "salesforce": {
     "cik_str": 1108524,
     "ticker": "CRM",
     "title": "SALESFORCE.COM, INC."
   },
-  "Disney": { "cik_str": 1744489, "ticker": "DIS", "title": "Walt Disney Co" },
-  "Intel": { "cik_str": 50863, "ticker": "INTC", "title": "INTEL CORP" },
-  "Bank of America": {
+  "disney": { "cik_str": 1744489, "ticker": "DIS", "title": "Walt Disney Co" },
+  "intel": { "cik_str": 50863, "ticker": "INTC", "title": "INTEL CORP" },
+  "bank of america": {
     "cik_str": 70858,
     "ticker": "BAC",
     "title": "BANK OF AMERICA CORP /DE/"
   },
-  "Comcast": { "cik_str": 1166691, "ticker": "CMCSA", "title": "COMCAST CORP" },
-  "Coke": { "cik_str": 21344, "ticker": "KO", "title": "COCA COLA CO" },
-  "AT&T": { "cik_str": 732717, "ticker": "T", "title": "AT&T INC." },
-  "Nike": { "cik_str": 320187, "ticker": "NKE", "title": "NIKE, Inc." },
-  "Oracle": { "cik_str": 1341439, "ticker": "ORCL", "title": "ORACLE CORP" },
-  "Pepsi": { "cik_str": 77476, "ticker": "PEP", "title": "PEPSICO INC" },
-  "SAP": { "cik_str": 1000184, "ticker": "SAP", "title": "SAP SE" },
-  "Toyota": { "cik_str": 1094517, "ticker": "TM", "title": "TOYOTA MOTOR CORP/" },
-  "McDonalds": { "cik_str": 63908, "ticker": "MCD", "title": "MCDONALDS CORP" },
-  "Cisco": { "cik_str": 858877, "ticker": "CSCO", "title": "CISCO SYSTEMS, INC." },
-  "Costco": {
+  "comcast": { "cik_str": 1166691, "ticker": "CMCSA", "title": "COMCAST CORP" },
+  "coke": { "cik_str": 21344, "ticker": "KO", "title": "COCA COLA CO" },
+  "at&t": { "cik_str": 732717, "ticker": "T", "title": "AT&T INC." },
+  "nike": { "cik_str": 320187, "ticker": "NKE", "title": "NIKE, Inc." },
+  "oracle": { "cik_str": 1341439, "ticker": "ORCL", "title": "ORACLE CORP" },
+  "pepsi": { "cik_str": 77476, "ticker": "PEP", "title": "PEPSICO INC" },
+  "sap": { "cik_str": 1000184, "ticker": "SAP", "title": "SAP SE" },
+  "toyota": {
+    "cik_str": 1094517,
+    "ticker": "TM",
+    "title": "TOYOTA MOTOR CORP/"
+  },
+  "mcdonalds": { "cik_str": 63908, "ticker": "MCD", "title": "MCDONALDS CORP" },
+  "cisco": {
+    "cik_str": 858877,
+    "ticker": "CSCO",
+    "title": "CISCO SYSTEMS, INC."
+  },
+  "costco": {
     "cik_str": 909832,
     "ticker": "COST",
     "title": "COSTCO WHOLESALE CORP /NEW"
   },
-  "Broadcom": { "cik_str": 1730168, "ticker": "AVGO", "title": "Broadcom Inc." },
-  "UPS": {
+  "broadcom": {
+    "cik_str": 1730168,
+    "ticker": "AVGO",
+    "title": "Broadcom Inc."
+  },
+  "ups": {
     "cik_str": 1090727,
     "ticker": "UPS",
     "title": "UNITED PARCEL SERVICE INC"
   },
-  "T Mobile": { "cik_str": 1283699, "ticker": "TMUS", "title": "T-Mobile US, Inc." },
-  "Exxon Mobil": { "cik_str": 34088, "ticker": "XOM", "title": "EXXON MOBIL CORP" },
-  "Accenture": { "cik_str": 1467373, "ticker": "ACN", "title": "Accenture plc" },
-  "Zoom": {
+  "t mobile": {
+    "cik_str": 1283699,
+    "ticker": "TMUS",
+    "title": "T-Mobile US, Inc."
+  },
+  "exxon mobil": {
+    "cik_str": 34088,
+    "ticker": "XOM",
+    "title": "EXXON MOBIL CORP"
+  },
+  "accenture": {
+    "cik_str": 1467373,
+    "ticker": "ACN",
+    "title": "Accenture plc"
+  },
+  "zoom": {
     "cik_str": 1585521,
     "ticker": "ZM",
     "title": "Zoom Video Communications, Inc."
   },
-  "Chevy": { "cik_str": 93410, "ticker": "CVX", "title": "CHEVRON CORP" },
-  "Texas Instruments": { "cik_str": 97476, "ticker": "TXN", "title": "TEXAS INSTRUMENTS INC" },
-  "Shopify": { "cik_str": 1594805, "ticker": "SHOP", "title": "SHOPIFY INC." },
-  "Lowes": { "cik_str": 60667, "ticker": "LOW", "title": "LOWES COMPANIES INC" },
-  "Honeywell": {
+  "chevy": { "cik_str": 93410, "ticker": "CVX", "title": "CHEVRON CORP" },
+  "texas instruments": {
+    "cik_str": 97476,
+    "ticker": "TXN",
+    "title": "TEXAS INSTRUMENTS INC"
+  },
+  "shopify": { "cik_str": 1594805, "ticker": "SHOP", "title": "SHOPIFY INC." },
+  "lowes": {
+    "cik_str": 60667,
+    "ticker": "LOW",
+    "title": "LOWES COMPANIES INC"
+  },
+  "honeywell": {
     "cik_str": 773840,
     "ticker": "HON",
     "title": "HONEYWELL INTERNATIONAL INC"
   },
-  "IBM": {
+  "ibm": {
     "cik_str": 51143,
     "ticker": "IBM",
     "title": "INTERNATIONAL BUSINESS MACHINES CORP"
   },
-  "Lockheed Martin": { "cik_str": 936468, "ticker": "LMT", "title": "LOCKHEED MARTIN CORP" },
-  "Starbucks": { "cik_str": 829224, "ticker": "SBUX", "title": "STARBUCKS CORP" },
-  "Wells Fargo": {
+  "lockheed martin": {
+    "cik_str": 936468,
+    "ticker": "LMT",
+    "title": "LOCKHEED MARTIN CORP"
+  },
+  "starbucks": {
+    "cik_str": 829224,
+    "ticker": "SBUX",
+    "title": "STARBUCKS CORP"
+  },
+  "wells fargo": {
     "cik_str": 72971,
     "ticker": "WFC",
     "title": "WELLS FARGO & COMPANY/MN"
   },
-  "Boeing": { "cik_str": 12927, "ticker": "BA", "title": "BOEING CO" },
-  "3M": { "cik_str": 66740, "ticker": "MMM", "title": "3M CO" },
-  "Sony": { "cik_str": 313838, "ticker": "SNE", "title": "SONY CORP" },
-  "Raytheon": {
+  "boeing": { "cik_str": 12927, "ticker": "BA", "title": "BOEING CO" },
+  "3m": { "cik_str": 66740, "ticker": "MMM", "title": "3M CO" },
+  "sony": { "cik_str": 313838, "ticker": "SNE", "title": "SONY CORP" },
+  "raytheon": {
     "cik_str": 101829,
     "ticker": "RTX",
     "title": "RAYTHEON TECHNOLOGIES CORP"
   },
-  "Fidelity": {
+  "fidelity": {
     "cik_str": 1136893,
     "ticker": "FIS",
     "title": "Fidelity National Information Services, Inc."
   },
-  "BlackRock": { "cik_str": 1364742, "ticker": "BLK", "title": "BlackRock Inc." },
-  "Intuit": { "cik_str": 896878, "ticker": "INTU", "title": "INTUIT INC" },
-  "American Express": { "cik_str": 4962, "ticker": "AXP", "title": "AMERICAN EXPRESS CO" },
-  "Target": { "cik_str": 27419, "ticker": "TGT", "title": "TARGET CORP" },
-  "Stryker": { "cik_str": 310764, "ticker": "SYK", "title": "STRYKER CORP" },
-  "Square": { "cik_str": 1512673, "ticker": "SQ", "title": "Square, Inc." }
+  "blackrock": {
+    "cik_str": 1364742,
+    "ticker": "BLK",
+    "title": "BlackRock Inc."
+  },
+  "intuit": { "cik_str": 896878, "ticker": "INTU", "title": "INTUIT INC" },
+  "american express": {
+    "cik_str": 4962,
+    "ticker": "AXP",
+    "title": "AMERICAN EXPRESS CO"
+  },
+  "target": { "cik_str": 27419, "ticker": "TGT", "title": "TARGET CORP" },
+  "stryker": { "cik_str": 310764, "ticker": "SYK", "title": "STRYKER CORP" },
+  "square": { "cik_str": 1512673, "ticker": "SQ", "title": "Square, Inc." }
 }
