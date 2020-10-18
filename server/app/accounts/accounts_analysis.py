@@ -1,4 +1,6 @@
 from app.accounts import ncr_banking_api_requests
+from app.accounts import customer_data_management
+
 import json
 import os
 known_numbers = {
@@ -14,16 +16,14 @@ print(os.getcwd())
 with open("app/accounts/user_accounts.json") as json_file:
     user_accounts = json.load(json_file)
 
-income_quintiles = []
-expenditure_quintiles = []
+income_quintiles = [1019.666667, 2745.416667, 4426.916667, 6988.666667, 14564.75]
+expenditure_quintiles = [2389.333333, 3372.666667, 4420.416667, 5931.083333, 10130.91667]
+
 def get_username(phone):
-    print('-----')
-    print("Phone Number: ", phone)
     if phone in known_numbers: 
         username = known_numbers[phone]
     else:
         username = "HACKATHONUSER001"
-    print("Decoded To: ", username)
     return username
 
 def get_full_name(phone):
@@ -85,23 +85,48 @@ def get_checkings_stats(phone):
 def get_savings_stats(phone):
     if get_username(phone) not in user_accounts:
         set_up_accounts(phone)
-    return user_accounts[get_username(phone)]["checkings"]
+    return user_accounts[get_username(phone)]["savings"]
+
+def quintile_position(arr, num):
+    result = 0
+    for q in arr:
+        if q < num:
+            result += 1
+    return result
+
 
 def get_category(phone):
+    income = get_savings_stats(phone)["income"]
+    spending = get_checkings_stats(phone)["expenditures"]
+
     return {
-            "incomeClass" : 2,
-            "spendingClass": 3,
+            "incomeClass" : quintile_position(income_quintiles, income),
+            "spendingClass": quintile_position(expenditure_quintiles, spending),
         }
 
 def get_purchase_breakdown(phone):
+    purchases = get_checkings_stats(phone)["transactions"]
+    purchases = [t["amount"] for t in purchases]
+
+    purchases = sorted(purchases)
+
+    large = sum(purchases[int(.75*len(purchases)):])
+    small = sum(purchases[: int(.25*len(purchases))])
+    total = sum(purchases)
     return {
-            "largePurchasePercent" : {"score": 90, "classAverage": 80},
-            "smallPurchasePercent": {"score": 10, "classAverage": 15}
+            "largePurchasePercent" : {"score": (100 * large) / total, "classAverage": 80},
+            "smallPurchasePercent": {"score": (100 * small) / total, "classAverage": 15}
         }
 
 def get_savings_breakdown(phone):
+    income = get_savings_stats(phone)["income"]
+    spending = get_checkings_stats(phone)["expenditures"]
+    savings = income - spending
+    score = min(((savings / income) / .20) * 100, 100)
+
     return {
-            "savingsScore" : {"score": 98, "classAverage": 83},
+            "monthlySavings" : savings,
+            "savingsScore" : {"score": score, "classAverage": 83},
             "savingsGoal": 28
         }
 
