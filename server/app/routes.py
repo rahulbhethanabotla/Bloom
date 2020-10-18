@@ -43,16 +43,24 @@ def get_checkings():
     return json.dumps(accounts_analysis.get_checkings_stats(phone))
 
 
-@app.route("/plot.png")
+@app.route("/checking.png")
 def plot_png():
-    if(bool(request.args['phone'])):
-        phone = request.args['phone']
-    else:
-        phone = request.headers['phone']
+    phone = request.args['phone']
     img = charts.chart_checking_account(
         accounts_analysis.get_checkings_stats(phone))
     return send_file(img,
-                     attachment_filename='plot.png',
+                     attachment_filename='checking.png',
+                     mimetype='image/png')
+
+
+@app.route("/purchase.png")
+def purchase_png():
+    phone = request.args['phone']
+
+    img = charts.chart_purchase_breakdown(
+        accounts_analysis.get_purchase_breakdown(phone))
+    return send_file(img,
+                     attachment_filename='purchase.png',
                      mimetype='image/png')
 
 

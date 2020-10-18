@@ -65,3 +65,38 @@ def chart_checking_account(user: dict):
     plt.savefig(img, format='png')
     img.seek(0)
     return img
+
+
+def chart_purchase_breakdown(breakdown: dict):
+    sns.set_theme()
+    otherSize = 40
+    largeUser = breakdown["largePurchasePercent"]["score"]
+    smallUser = breakdown["smallPurchasePercent"]["score"]
+    largeAverage = np.random.normal(
+        breakdown["largePurchasePercent"]["classAverage"], size=otherSize)
+    smallAverage = np.random.normal(
+        breakdown["smallPurchasePercent"]["classAverage"], size=otherSize)
+
+    data = pd.DataFrame({"A": ["small", "large"], "B": [
+                        smallUser, largeUser], "C": ["user", "user"]})
+
+    for i in range(otherSize):
+        frame = pd.DataFrame(
+            [["large", largeAverage[i], "average"]], columns=list("ABC"))
+        data = data.append(frame)
+        frame = pd.DataFrame(
+            [["small", smallAverage[i], "average"]], columns=list("ABC"))
+        data = data.append(frame)
+
+    f, ax = plt.subplots()
+    sns.swarmplot(data=data, x="A", y="B", hue="C", palette="mako", size=8)
+    ax.set_title("Purchase Breakdown",
+                 fontname="geneva", fontsize=20)
+    ax.set(xlabel='Type of Purchase', ylabel='Percentage of Purchases')
+    format_ax(ax)
+    plt.legend(title="")
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    return img
